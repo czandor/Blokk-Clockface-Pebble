@@ -70,8 +70,8 @@ function stored(key, fallback) {
   }
 }
 
-// Pebble Time (basalt) and Pebble Round 2 (gabbro) have no heart-rate sensor.
-var NO_HR_PLATFORMS = ['basalt', 'gabbro'];
+// Pebble Time (basalt), Time Round (chalk) and Round 2 (gabbro) have no heart-rate sensor.
+var NO_HR_PLATFORMS = ['basalt', 'chalk', 'gabbro'];
 
 function watchLacksHrSensor() {
   try {

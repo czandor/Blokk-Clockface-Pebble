@@ -1,6 +1,10 @@
-# Változásnapló — Blokk (Pebble Time, Pebble Time 2 & Pebble Round 2)
+# Változásnapló — Blokk (Pebble Time, Pebble Time Round, Pebble Time 2 & Pebble Round 2)
 
 ## 1.1.0 (2026-11-21)
+
+- Új platform: **Pebble Time Round (`chalk`, 180×180 kerek)** a Round 2 elrendezés ~0,69-szeres kicsinyítésével (`FONT_TIME_70`, `FONT_DATE_17`, `FONT_INFO_18`; a `FONT_WDAY_11`, `FONT_LABEL_13`, `FONT_AMPM_18` közös a Pebble Time-mal). Pulzusmérő itt sincs, ezért a `SEC` az alapértelmezett 2. mező.
+- **Töltésjelzés:** a `BTT` érték mögött `+` jel jelenik meg, ha az óra töltőn van (pl. `085+`), minden platformon. A `+` karakter bekerült a `FONT_INFO_*` fontokba.
+- **Javítva: verem-túlcsordulás a Time Round-on.** Az óralap első rajzolásakor hardfaulttal (MPU-sértés az app RAM elején, `0x20018000`) újraindította az órát, ami a beállított óralappal végtelen újraindulási hurokká vált. Ok: a Time Round firmware-ben (v4.3) az app verme ~2 KB, a firmware szövegrajzolója ennek ~1,4 KB-ját használja, a 180 bájtos helyi árnyékpuffer és az összevont (inline) rajzolófüggvények pedig a maradékot is elvitték. Javítás: az árnyéksor-puffer és a szövegpufferek statikus memóriába kerültek, a rajzolólépések külön (`noinline`) függvényekben futnak. Mért tartalék a legmélyebb ponton: ~300 bájt (előtte negatív). A többi platformot is érinti a kód, ott is működik.
 
 - Új platform: **Pebble Round 2 (`gabbro`, 260×260 kerek)**. Saját `American Captain` méretkészlet (`FONT_TIME_100`, `FONT_DATE_24`, `FONT_WDAY_15`, `FONT_INFO_26`, `FONT_LABEL_18`, `FONT_AMPM_26`) és a kör alakú kijelzőhöz igazított elrendezés: dátum fent, nagy `HH:MM` középen, a 3 soros információs mezők a 45°-os árnyékban.
 - Kerek kijelzőn nincs sarokmaszk (`CORNER_R = 0`): a kijelző széle adja a kártya körvonalát. A framebuffer-menet a soronkénti `min_x`/`max_x` tartományt használja, így az árnyék és a háttér pontosan a körön belül rajzolódik.

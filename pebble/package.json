@@ -3,7 +3,7 @@
   "author": "Andor Czafik",
   "version": "1.1.0",
   "private": true,
-  "description": "Blokk watchface for Pebble Time, Pebble Time 2 and Pebble Round 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).",
+  "description": "Blokk watchface for Pebble Time, Pebble Time Round, Pebble Time 2 and Pebble Round 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).",
   "dependencies": {
     "@rebble/clay": "1.1.0"
   },
@@ -14,6 +14,7 @@
     "enableMultiJS": true,
     "targetPlatforms": [
       "basalt",
+      "chalk",
       "emery",
       "gabbro"
     ],
@@ -78,7 +79,7 @@
           "type": "font",
           "name": "FONT_INFO_24",
           "file": "fonts/AmericanCaptain.ttf",
-          "characterRegex": "[0-9.\\-NOF]",
+          "characterRegex": "[0-9.\\-NOF+]",
           "targetPlatforms": [
             "emery"
           ]
@@ -125,14 +126,15 @@
           "file": "fonts/AmericanCaptain.ttf",
           "characterRegex": "[A-Z]",
           "targetPlatforms": [
-            "basalt"
+            "basalt",
+            "chalk"
           ]
         },
         {
           "type": "font",
           "name": "FONT_INFO_17",
           "file": "fonts/AmericanCaptain.ttf",
-          "characterRegex": "[0-9.\\-NOF]",
+          "characterRegex": "[0-9.\\-NOF+]",
           "targetPlatforms": [
             "basalt"
           ]
@@ -143,7 +145,8 @@
           "file": "fonts/AmericanCaptain.ttf",
           "characterRegex": "[A-Z]",
           "targetPlatforms": [
-            "basalt"
+            "basalt",
+            "chalk"
           ]
         },
         {
@@ -152,7 +155,35 @@
           "file": "fonts/AmericanCaptain.ttf",
           "characterRegex": "[AMP]",
           "targetPlatforms": [
-            "basalt"
+            "basalt",
+            "chalk"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_TIME_70",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[0-9]",
+          "targetPlatforms": [
+            "chalk"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_DATE_17",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z0-9 ]",
+          "targetPlatforms": [
+            "chalk"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_INFO_18",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[0-9.\\-NOF+]",
+          "targetPlatforms": [
+            "chalk"
           ]
         },
         {
@@ -186,7 +217,7 @@
           "type": "font",
           "name": "FONT_INFO_26",
           "file": "fonts/AmericanCaptain.ttf",
-          "characterRegex": "[0-9.\\-NOF]",
+          "characterRegex": "[0-9.\\-NOF+]",
           "targetPlatforms": [
             "gabbro"
           ]

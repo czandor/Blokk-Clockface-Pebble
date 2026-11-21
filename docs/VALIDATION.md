@@ -1,10 +1,14 @@
-# Ellenőrzési napló — Blokk (Pebble Time, Pebble Time 2 & Pebble Round 2)
+# Ellenőrzési napló — Blokk (Pebble Time, Pebble Time Round, Pebble Time 2 & Pebble Round 2)
 
 ## 1.1.0 (2026-11-21)
 
 ### Emulátoron és automatizált tesztekkel ellenőrizve
-- **Build:** `pebble clean` + `tools/build.ps1` sikeres `basalt` + `emery` + `gabbro` célra (csak a szokásos `RWX` linker-figyelmeztetés). Erőforrás / RAM: Gabbro `16 585 B` / `7 523 B`, Emery `15 261 B` / `8 475 B`, Basalt `13 681 B` / `7 475 B`.
-- **Egységtesztek (`node tools/test.cjs`):** sikeres; új ellenőrzés: `targetPlatforms = basalt, emery, gabbro`, a telefonos alapértelmezett `FIELD3 = 10` (`VIB`), a Clay-mock az `@rebble/clay` csomagnévre figyel.
+- **Build:** `pebble clean` + `tools/build.ps1` sikeres `basalt` + `chalk` + `emery` + `gabbro` célra (csak a szokásos `RWX` linker-figyelmeztetés). RAM-lábnyom a végleges buildben: Gabbro `8 203 B`, Emery `9 103 B`, Chalk `8 019 B`, Basalt `8 051 B`.
+- **Egységtesztek (`node tools/test.cjs`):** sikeres; új ellenőrzés: `targetPlatforms = basalt, chalk, emery, gabbro`, a telefonos alapértelmezett `FIELD3 = 10` (`VIB`), a Clay-mock az `@rebble/clay` csomagnévre figyel.
+- **Chalk (Time Round) összeomlás és javítás:** az első `chalk` build a Time Round emulátoron és Andor valódi óráján is újraindulási hurokba került. A firmware soros konzolja szerint hardfault: `PC = 0x08062754` (firmware), `MMFAR = 0x20018000` (`DACCVIOL`), `Task: App <Blokk>`. Felezéses tesztekkel kizárva: a fontméret (a `FONT_TIME_70` legnagyobb glifje 179 B < 256 B, és a 60-as fonttal is elszállt), a pozíció, a szóköz-glif, a közös font-erőforrás és a Health. `APP_LOG` és verem-feltöltéses (`0xA5`) mérés alapján verem-túlcsordulás: az update proc belépésekor csak ~1,6 KB szabad verem van, ennek ~1,4 KB-ját a firmware szövegrajzolója használja. Javítás után 9+ egymás utáni képkocka hiba nélkül, a legkisebb mért szabad verem ~300 B. Töltés közben (`emu-battery --charging`) is ellenőrizve, hardfault nélkül.
+- **Chalk elrendezés (`docs/chalk-case-*.png`):** `14:25`, a leghosszabb dátum (`SEPTEMBER 30 WED`) `22:08`-kor és `12:11` a 180×180-as körön belül.
+- **A rajzolókód átszervezése után újra ellenőrizve:** Gabbro, Emery és Basalt emulátoron hiba nélkül fut. Basalt-on töltés közben a `BTT 070+` kiírás is látszik.
+- **Töltésjelzés (`+`):** a `BTT` érték mögött, ha az óra töltőn van (`is_charging || is_plugged`). Emulátoron Basalt-on és Chalk-on ellenőrizve; Andor kérésére nem készült róla új áruházi kép.
 - **Gabbro (Round 2) emulátor (`docs/gabbro-case-*.png`, `docs/gabbro-vib.png`):**
   - Széles (`20:08`), keskeny (`11:11`) és vegyes (`14:25`, `08:47`) számjegyek a körön belül; a 45°-os árnyék és a háttér csak a látható körben rajzolódik.
   - 5 jegyű lépésszám (`12345`) és a 3 soros mezők a kör alsó részén is a kijelzőn belül maradnak.
@@ -14,7 +18,8 @@
 - **`VIB` mező mindhárom emulátoron (`docs/basalt-vib.png`, `docs/emery-vib.png`, `docs/gabbro-vib.png`):** alapértelmezettként a jobb felső helyen, `VIB ON` kiírással.
 
 ### Fizikai órán
-- **Pebble Time 2 (`192.168.130.135`):** `Blokk-1.1.0.pbw` sikeresen telepítve; a megjelenést Andor nézi élőben.
+- **Pebble Time 2 (`192.168.130.135`):** a `VIB`-es `Blokk-1.1.0.pbw` sikeresen telepítve; Andor élőben ellenőrizte („jó minden”).
+- **Pebble Time Round (ugyanazon a telefonon, `192.168.130.135`):** az első `chalk` build Andor óráján is összeomlott; a verem-javított és a töltésjelzéses végleges build telepítve, Andor szerint „működik, nem crashel már”. Andor szerint az óralap a Time Round-on kissé lassú, de használható. A teljes képernyős pixelmenet minden frissítéskor lefut, és alapból a `SEC` mező másodpercenként frissít; ez optimalizálható.
 - **Még ellenőrzendő:** a `VIB OFF` állapot valódi Néma időben (az emulátorban a Néma idő parancssorból nem kapcsolható, így az `OFF` kiírás csak kódszinten ellenőrzött), valamint a teljes Round 2 elrendezés fizikai Pebble Round 2 órán (ilyen eszköz nem állt rendelkezésre).
 
 ## 1.0.1 (2026-11-21)

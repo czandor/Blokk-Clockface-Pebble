@@ -31,21 +31,25 @@ const media = [
   { type: 'font', name: 'FONT_TIME_84', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_DATE_22', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_WDAY_14', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['emery'] },
-  { type: 'font', name: 'FONT_INFO_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF]', targetPlatforms: ['emery'] },
+  { type: 'font', name: 'FONT_INFO_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF+]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_LABEL_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_AMPM_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['emery'] },
-  // Basalt (Pebble Time / Time Steel, 144x168)
+  // Basalt (Pebble Time / Time Steel, 144x168); weekday, label and AM/PM sizes are shared with Chalk
   { type: 'font', name: 'FONT_TIME_60', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_DATE_16', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['basalt'] },
-  { type: 'font', name: 'FONT_WDAY_11', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
-  { type: 'font', name: 'FONT_INFO_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF]', targetPlatforms: ['basalt'] },
-  { type: 'font', name: 'FONT_LABEL_13', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
-  { type: 'font', name: 'FONT_AMPM_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['basalt'] },
+  { type: 'font', name: 'FONT_WDAY_11', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt', 'chalk'] },
+  { type: 'font', name: 'FONT_INFO_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF+]', targetPlatforms: ['basalt'] },
+  { type: 'font', name: 'FONT_LABEL_13', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt', 'chalk'] },
+  { type: 'font', name: 'FONT_AMPM_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['basalt', 'chalk'] },
+  // Chalk (Pebble Time Round, 180x180 round)
+  { type: 'font', name: 'FONT_TIME_70', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['chalk'] },
+  { type: 'font', name: 'FONT_DATE_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['chalk'] },
+  { type: 'font', name: 'FONT_INFO_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF+]', targetPlatforms: ['chalk'] },
   // Gabbro (Pebble Round 2, 260x260 round)
   { type: 'font', name: 'FONT_TIME_100', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['gabbro'] },
   { type: 'font', name: 'FONT_DATE_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['gabbro'] },
   { type: 'font', name: 'FONT_WDAY_15', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['gabbro'] },
-  { type: 'font', name: 'FONT_INFO_26', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF]', targetPlatforms: ['gabbro'] },
+  { type: 'font', name: 'FONT_INFO_26', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF+]', targetPlatforms: ['gabbro'] },
   { type: 'font', name: 'FONT_LABEL_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['gabbro'] },
   { type: 'font', name: 'FONT_AMPM_26', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['gabbro'] }
 ];
@@ -58,7 +62,7 @@ fs.writeFileSync(
       author: 'Andor Czafik',
       version,
       private: true,
-      description: 'Blokk watchface for Pebble Time, Pebble Time 2 and Pebble Round 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).',
+      description: 'Blokk watchface for Pebble Time, Pebble Time Round, Pebble Time 2 and Pebble Round 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).',
       // @rebble/clay is the maintained Clay fork; pebble-clay 1.0.4 has no gabbro/flint binaries.
       dependencies: { '@rebble/clay': '1.1.0' },
       pebble: {
@@ -66,7 +70,7 @@ fs.writeFileSync(
         uuid: '3fb5fda5-0820-4c60-8adf-c07541a3870d',
         sdkVersion: '3',
         enableMultiJS: true,
-        targetPlatforms: ['basalt', 'emery', 'gabbro'],
+        targetPlatforms: ['basalt', 'chalk', 'emery', 'gabbro'],
         capabilities: ['configurable', 'health'],
         watchapp: { watchface: true },
         messageKeys: keys,
@@ -117,7 +121,7 @@ const config = [
   { type: 'heading', defaultValue: 'Blokk' },
   {
     type: 'text',
-    defaultValue: `Pebble Time / Time 2 / Round 2 · ${version}<br>Design: Zoltan Nagy (Zo Nagy) · Code: Andor Czafik`
+    defaultValue: `Pebble Time / Time Round / Time 2 / Round 2 · ${version}<br>Design: Zoltan Nagy (Zo Nagy) · Code: Andor Czafik`
   },
   {
     type: 'section',

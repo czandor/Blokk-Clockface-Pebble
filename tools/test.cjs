@@ -10,7 +10,7 @@ const config = JSON.parse(fs.readFileSync(path.join(root, 'pebble/src/pkjs/confi
 
 // 1. Validate Pebble manifest
 assert.equal(pkg.pebble.displayName, 'Blokk');
-assert.deepEqual(pkg.pebble.targetPlatforms, ['basalt', 'emery', 'gabbro']);
+assert.deepEqual(pkg.pebble.targetPlatforms, ['basalt', 'chalk', 'emery', 'gabbro']);
 assert.equal(pkg.pebble.watchapp.watchface, true);
 assert.ok(pkg.pebble.uuid && pkg.pebble.uuid !== '57a099b6-508f-41fb-badc-1371da1492d9', 'Must have unique UUID');
 

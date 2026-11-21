@@ -1,12 +1,12 @@
-# Blokk — Pebble Time, Pebble Time 2 & Pebble Round 2
+# Blokk — Pebble Time, Time Round, Time 2 & Round 2
 
 ![Blokk Banner](store/banner-720x320.png)
 
-A native C port of the original Fitbit **Blokk** watchface (Design: **Zoltan Nagy / Zo Nagy**, Code: **Andor Czafik**) for **Pebble Time (`basalt`, 144×168)**, **Pebble Time 2 (`emery`, 200×228)** and **Pebble Round 2 (`gabbro`, 260×260 round)**.
+A native C port of the original Fitbit **Blokk** watchface (Design: **Zoltan Nagy / Zo Nagy**, Code: **Andor Czafik**) for **Pebble Time (`basalt`, 144×168)**, **Pebble Time Round (`chalk`, 180×180 round)**, **Pebble Time 2 (`emery`, 200×228)** and **Pebble Round 2 (`gabbro`, 260×260 round)**.
 
 It preserves the iconic bold condensed typography (`American Captain`), mathematically exact 45° black long drop shadows, 9 vibrant color themes with optional diagonal gradients, date header, and the 4 staggered health & status fields nested cleanly inside the shadow zone.
 
-**Download latest release:** [Blokk-1.0.1.pbw](https://github.com/czandor/Blokk-Clockface-Pebble/releases/latest) (also in `dist/Blokk-1.0.1.pbw` with `dist/SHA256SUMS.txt`)
+**Download latest release:** [Blokk-1.1.0.pbw](https://github.com/czandor/Blokk-Clockface-Pebble/releases/latest) (also in `dist/Blokk-1.1.0.pbw` with `dist/SHA256SUMS.txt`)
 
 ## Features
 
@@ -16,10 +16,10 @@ It preserves the iconic bold condensed typography (`American Captain`), mathemat
   - 6 selection modes: *By the time of day* (default), *Choose one color*, *Random every day*, *Random every hour*, *Random every minute*, and *Random on wrist flick*.
   - Optional **Gradient background** rendered with 4×4 Bayer ordered dithering on Pebble Time 2's 64-color display.
 - **4 Configurable Info Fields (plus 4 Extra Fields on Wrist Flick):**
-  - Choose from: `STP` (Steps), `BPM` (Heart rate, Pebble Time 2 only), `BTT` (Battery % or low-battery only ≤30%), `DST` (Distance in km or miles), `CAL` (Calories burned), `ACT` (Active minutes), `SLP` (Sleep hours), `SEC` (Seconds), `VIB` (`ON`, or `OFF` while Quiet Time is active — the default top-right field), or `Nothing`.
+  - Choose from: `STP` (Steps), `BPM` (Heart rate, Pebble Time 2 only), `BTT` (Battery % or low-battery only ≤30%, with a trailing `+` while on the charger), `DST` (Distance in km or miles), `CAL` (Calories burned), `ACT` (Active minutes), `SLP` (Sleep hours), `SEC` (Seconds), `VIB` (`ON`, or `OFF` while Quiet Time is active — the default top-right field), or `Nothing`.
   - Automatically switches between `MINUTE_UNIT` and `SECOND_UNIT` tick timers depending on whether `SEC` is currently visible.
   - Enable **Extra Info Fields** to toggle a second set of 4 fields for 20 seconds by flicking your wrist (with optional short vibration respecting Quiet Time).
-- **Round Display Layout (Pebble Round 2):** Larger digits and fields arranged for the 260×260 circle; the shadow and background are drawn only inside the visible round area.
+- **Round Display Layouts (Pebble Time Round & Round 2):** Digits and fields arranged for the 180×180 and 260×260 circles; the shadow and background are drawn only inside the visible round area.
 - **Offline Clay Settings:** Configure everything directly in the Pebble phone app without requiring internet access (via the maintained `@rebble/clay` package).
 
 ## Screenshots
@@ -28,9 +28,9 @@ It preserves the iconic bold condensed typography (`American Captain`), mathemat
 | :---: | :---: | :---: | :---: | :---: |
 | ![Turquoise](store/emery-01-turquoise.png) | ![Gradient](store/emery-03-gradient-blue.png) | ![12h AM](store/emery-04-12h-ampm.png) | ![12h PM](store/emery-05-12h-pm.png) | ![Basalt Red](store/basalt-02-red.png) |
 
-| Pebble Round 2 (Turquoise) | Pebble Round 2 (Gradient) | Pebble Round 2 (12h AM) |
-| :---: | :---: | :---: |
-| ![Round Turquoise](store/gabbro-01-turquoise.png) | ![Round Gradient](store/gabbro-02-gradient-blue.png) | ![Round 12h AM](store/gabbro-03-12h-am.png) |
+| Pebble Round 2 (Turquoise) | Pebble Round 2 (Gradient) | Pebble Round 2 (12h AM) | Pebble Time Round (Turquoise) | Pebble Time Round (Purple) |
+| :---: | :---: | :---: | :---: | :---: |
+| ![Round Turquoise](store/gabbro-01-turquoise.png) | ![Round Gradient](store/gabbro-02-gradient-blue.png) | ![Round 12h AM](store/gabbro-03-12h-am.png) | ![Time Round Turquoise](store/chalk-01-turquoise.png) | ![Time Round Purple](store/chalk-02-purple.png) |
 
 ## Repository Structure
 

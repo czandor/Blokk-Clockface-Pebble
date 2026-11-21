@@ -31,6 +31,34 @@
   #define LABEL_Y_OFF    3
   #define VAL_W          40
   #define CORNER_R       12
+#elif defined(PBL_PLATFORM_CHALK)
+  // Pebble Time Round (180x180 round, no heart-rate sensor): the Round 2
+  // layout scaled by ~0.69, reusing the Basalt label/weekday/AM-PM fonts.
+  #define HAS_HR_SENSOR 0
+  #define RES_FONT_TIME  RESOURCE_ID_FONT_TIME_70
+  #define RES_FONT_DATE  RESOURCE_ID_FONT_DATE_17
+  #define RES_FONT_WDAY  RESOURCE_ID_FONT_WDAY_11
+  #define RES_FONT_INFO  RESOURCE_ID_FONT_INFO_18
+  #define RES_FONT_LABEL RESOURCE_ID_FONT_LABEL_13
+  #define RES_FONT_AMPM  RESOURCE_ID_FONT_AMPM_18
+  #define TIME_Y         32
+  #define TIME_BOX_H     76
+  #define DIGIT_GAP      4
+  #define COLON_W        11
+  #define COLON_R        5
+  #define COLON_Y1_OFF   31
+  #define COLON_Y2_OFF   55
+  #define AMPM_RECT      GRect(28, 123, 32, 24)
+  #define DATE_Y         18
+  #define DATE_GAP       3
+  #define WDAY_Y_OFF     1
+  #define INFO_SPLIT_X   { 73, 93, 136, 111 }
+  #define INFO_ROW_Y     { 102, 121, 102, 140 }
+  #define LABEL_X_OFF    30
+  #define LABEL_W        28
+  #define LABEL_Y_OFF    3
+  #define VAL_W          40
+  #define CORNER_R       0
 #elif defined(PBL_PLATFORM_GABBRO)
   // Pebble Round 2 (260x260 round, no heart-rate sensor). The round display
   // itself is the card outline, so no corner mask is needed.
@@ -263,6 +291,7 @@ static time_t s_hr_measured_at = 0;
 #endif
 
 static int s_battery = 100;
+static bool s_battery_charging = false;  // on the charger (charging or plugged in and full)
 static int s_steps = -1;
 static int s_hr = -1;
 static int s_distance_m = -1;
@@ -536,7 +565,7 @@ static void format_info_field(int info_type, char *label, size_t label_sz, char 
       // fallthrough
     case INFO_BATTERY:
       snprintf(label, label_sz, "BTT");
-      snprintf(val, val_sz, "%03d", s_battery);
+      snprintf(val, val_sz, s_battery_charging ? "%03d+" : "%03d", s_battery);
       break;
     case INFO_DISTANCE: {
       snprintf(label, label_sz, "DST");
@@ -622,7 +651,15 @@ static bool is_outside_rounded_corner(int px, int py) {
   return (dx * dx + dy * dy) >= (CORNER_R * CORNER_R);
 }
 
-static void draw_time_and_shadow(GContext *ctx) {
+// Row buffer of the shadow pass. Kept in static RAM, not on the stack: the app
+// stack is only a few KB, and on Pebble Time Round (chalk, firmware 4.3) the
+// firmware text renderer needs most of it. A local array here (plus inlining
+// into the text-drawing code) overflowed the stack into the MPU guard
+// (hard fault at the app RAM start, 0x20018000) and reboot-looped the watch.
+static uint8_t s_shadow_row[SCREEN_W];
+
+// Kept out of line so that the firmware text calls below run on a small frame.
+static void __attribute__((noinline)) draw_time_digits(GContext *ctx) {
   // 1. Clear to pure black so white glyphs stand out cleanly
   graphics_context_set_fill_color(ctx, GColorBlack);
   graphics_fill_rect(ctx, GRect(0, 0, SCREEN_W, SCREEN_H), 0, GCornerNone);
@@ -690,15 +727,17 @@ static void draw_time_and_shadow(GContext *ctx) {
     graphics_draw_text(ctx, ampm, s_font_ampm, AMPM_RECT,
                        GTextOverflowModeTrailingEllipsis, GTextAlignmentLeft, NULL);
   }
+}
 
+static void __attribute__((noinline)) apply_shadow_and_background(GContext *ctx) {
   // 3. Single-pass 45-degree long drop shadow + colorful background fill
   int color_id = resolve_bg_color(false);
   bool gradient = (s_settings.bg_gradient != 0);
 
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   if (fb) {
-    uint8_t shadow[SCREEN_W];
-    memset(shadow, 0, sizeof(shadow));
+    uint8_t *shadow = s_shadow_row;
+    memset(shadow, 0, sizeof(s_shadow_row));
 
     for (int py = 0; py < SCREEN_H; py++) {
       GBitmapDataRowInfo info = gbitmap_get_data_row_info(fb, py);
@@ -724,13 +763,20 @@ static void draw_time_and_shadow(GContext *ctx) {
   }
 }
 
-static void draw_date(GContext *ctx) {
+static void draw_time_and_shadow(GContext *ctx) {
+  draw_time_digits(ctx);
+  apply_shadow_and_background(ctx);
+}
+
+// Text buffers are static and the draw helpers stay out of line to keep the
+// stack shallow while the firmware renders text (see s_shadow_row).
+static void __attribute__((noinline)) draw_date(GContext *ctx) {
   int mon = s_now.tm_mon;
   if (mon < 0 || mon > 11) mon = 0;
   int wday = s_now.tm_wday;
   if (wday < 0 || wday > 6) wday = 0;
 
-  char main_date[20];
+  static char main_date[20];
   snprintf(main_date, sizeof(main_date), "%s %02d", MONTH_NAMES[mon], s_now.tm_mday);
   const char *wd = WDAY_NAMES[wday];
 
@@ -748,7 +794,7 @@ static void draw_date(GContext *ctx) {
                      GTextOverflowModeTrailingEllipsis, GTextAlignmentLeft, NULL);
 }
 
-static void draw_info_fields(GContext *ctx) {
+static void __attribute__((noinline)) draw_info_fields(GContext *ctx) {
   static const int split_x[4] = INFO_SPLIT_X;
   static const int row_y[4]   = INFO_ROW_Y;
 
@@ -756,8 +802,8 @@ static void draw_info_fields(GContext *ctx) {
 
   for (int i = 0; i < 4; i++) {
     int info_type = s_settings.fields[base + i];
-    char label[8];
-    char val[12];
+    static char label[8];
+    static char val[12];
     bool hide = false;
     format_info_field(info_type, label, sizeof(label), val, sizeof(val), &hide);
     if (hide) continue;
@@ -793,6 +839,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 
 static void battery_handler(BatteryChargeState state) {
   s_battery = state.charge_percent;
+  s_battery_charging = state.is_charging || state.is_plugged;
   layer_mark_dirty(s_canvas);
 }
 
@@ -991,7 +1038,9 @@ static void init(void) {
     s_hr_on_shake = persist_read_bool(HR_SHAKE_KEY);
   }
 
-  s_battery = battery_state_service_peek().charge_percent;
+  BatteryChargeState battery = battery_state_service_peek();
+  s_battery = battery.charge_percent;
+  s_battery_charging = battery.is_charging || battery.is_plugged;
   refresh_health();
 
   s_window = window_create();
