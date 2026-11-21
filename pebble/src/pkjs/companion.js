@@ -1,6 +1,6 @@
 'use strict';
 
-var Clay = require('pebble-clay');
+var Clay = require('@rebble/clay');
 var keys = require('message_keys');
 
 function clayCustomFn() {
@@ -70,11 +70,14 @@ function stored(key, fallback) {
   }
 }
 
-function isBasaltWatch() {
+// Pebble Time (basalt) and Pebble Round 2 (gabbro) have no heart-rate sensor.
+var NO_HR_PLATFORMS = ['basalt', 'gabbro'];
+
+function watchLacksHrSensor() {
   try {
     if (typeof Pebble !== 'undefined' && typeof Pebble.getActiveWatchInfo === 'function') {
       var info = Pebble.getActiveWatchInfo();
-      return info && info.platform === 'basalt';
+      return !!info && NO_HR_PLATFORMS.indexOf(info.platform) !== -1;
     }
   } catch (e) {}
   return false;
@@ -82,20 +85,20 @@ function isBasaltWatch() {
 
 function loadSettings() {
   var saved = stored('blokk.settings', null);
-  var basalt = isBasaltWatch();
+  var noHr = watchLacksHrSensor();
   var src = saved || {};
   Object.keys(defaults).forEach(function (k) {
     if (src[k] !== undefined) {
       settings[k] = src[k];
-    } else if (basalt && k === 'FIELD2') {
-      settings[k] = 9; // SEC instead of BPM on Pebble Time (no HR sensor)
-    } else if (basalt && k === 'FIELD6') {
+    } else if (noHr && k === 'FIELD2') {
+      settings[k] = 9; // SEC instead of BPM (no HR sensor)
+    } else if (noHr && k === 'FIELD6') {
       settings[k] = 0; // Nothing instead of duplicate SEC in secondary fields
     } else {
       settings[k] = defaults[k];
     }
   });
-  if (!saved && basalt && typeof clay.setSettings === 'function') {
+  if (!saved && noHr && typeof clay.setSettings === 'function') {
     try {
       clay.setSettings({ FIELD2: '9', FIELD6: '0' });
     } catch (e) {}

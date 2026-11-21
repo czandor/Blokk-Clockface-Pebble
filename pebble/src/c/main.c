@@ -31,6 +31,34 @@
   #define LABEL_Y_OFF    3
   #define VAL_W          40
   #define CORNER_R       12
+#elif defined(PBL_PLATFORM_GABBRO)
+  // Pebble Round 2 (260x260 round, no heart-rate sensor). The round display
+  // itself is the card outline, so no corner mask is needed.
+  #define HAS_HR_SENSOR 0
+  #define RES_FONT_TIME  RESOURCE_ID_FONT_TIME_100
+  #define RES_FONT_DATE  RESOURCE_ID_FONT_DATE_24
+  #define RES_FONT_WDAY  RESOURCE_ID_FONT_WDAY_15
+  #define RES_FONT_INFO  RESOURCE_ID_FONT_INFO_26
+  #define RES_FONT_LABEL RESOURCE_ID_FONT_LABEL_18
+  #define RES_FONT_AMPM  RESOURCE_ID_FONT_AMPM_26
+  #define TIME_Y         46
+  #define TIME_BOX_H     110
+  #define DIGIT_GAP      6
+  #define COLON_W        16
+  #define COLON_R        7
+  #define COLON_Y1_OFF   44
+  #define COLON_Y2_OFF   79
+  #define AMPM_RECT      GRect(40, 178, 46, 34)
+  #define DATE_Y         26
+  #define DATE_GAP       4
+  #define WDAY_Y_OFF     2
+  #define INFO_SPLIT_X   { 106, 134, 196, 160 }
+  #define INFO_ROW_Y     { 148, 175, 148, 202 }
+  #define LABEL_X_OFF    40
+  #define LABEL_W        38
+  #define LABEL_Y_OFF    5
+  #define VAL_W          58
+  #define CORNER_R       0
 #else
   #define HAS_HR_SENSOR 1
   #define RES_FONT_TIME  RESOURCE_ID_FONT_TIME_84
@@ -191,7 +219,7 @@ static Settings s_settings = {
   .bg_option = BG_OPTION_TIME_OF_DAY,
   .bg_color = 2,
   .bg_gradient = 0,
-#if defined(PBL_PLATFORM_BASALT)
+#if !HAS_HR_SENSOR
   .fields = {
     INFO_STEPS, INFO_SECONDS, INFO_ACTIVE, INFO_BATTERY,
     INFO_CALORIES, INFO_NONE, INFO_SLEEP, INFO_DISTANCE
@@ -575,6 +603,7 @@ static int measure_width(const char *str, GFont font) {
 }
 
 static bool is_outside_rounded_corner(int px, int py) {
+  if (CORNER_R <= 0) return false;  // round displays: the screen edge is the outline
   int dx = 0;
   int dy = 0;
   if (px < CORNER_R) dx = CORNER_R - 1 - px;

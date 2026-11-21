@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '../pebble');
-const version = '1.0.1';
+const version = '1.1.0';
 
 const keys = [
   'BG_OPTION',
@@ -40,7 +40,14 @@ const media = [
   { type: 'font', name: 'FONT_WDAY_11', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_INFO_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_LABEL_13', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
-  { type: 'font', name: 'FONT_AMPM_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['basalt'] }
+  { type: 'font', name: 'FONT_AMPM_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['basalt'] },
+  // Gabbro (Pebble Round 2, 260x260 round)
+  { type: 'font', name: 'FONT_TIME_100', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['gabbro'] },
+  { type: 'font', name: 'FONT_DATE_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['gabbro'] },
+  { type: 'font', name: 'FONT_WDAY_15', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['gabbro'] },
+  { type: 'font', name: 'FONT_INFO_26', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['gabbro'] },
+  { type: 'font', name: 'FONT_LABEL_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['gabbro'] },
+  { type: 'font', name: 'FONT_AMPM_26', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['gabbro'] }
 ];
 
 fs.writeFileSync(
@@ -51,14 +58,15 @@ fs.writeFileSync(
       author: 'Andor Czafik',
       version,
       private: true,
-      description: 'Blokk watchface for Pebble Time and Pebble Time 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).',
-      dependencies: { 'pebble-clay': '1.0.4' },
+      description: 'Blokk watchface for Pebble Time, Pebble Time 2 and Pebble Round 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).',
+      // @rebble/clay is the maintained Clay fork; pebble-clay 1.0.4 has no gabbro/flint binaries.
+      dependencies: { '@rebble/clay': '1.1.0' },
       pebble: {
         displayName: 'Blokk',
         uuid: '3fb5fda5-0820-4c60-8adf-c07541a3870d',
         sdkVersion: '3',
         enableMultiJS: true,
-        targetPlatforms: ['basalt', 'emery'],
+        targetPlatforms: ['basalt', 'emery', 'gabbro'],
         capabilities: ['configurable', 'health'],
         watchapp: { watchface: true },
         messageKeys: keys,
@@ -108,7 +116,7 @@ const config = [
   { type: 'heading', defaultValue: 'Blokk' },
   {
     type: 'text',
-    defaultValue: `Pebble Time / Time 2 · ${version}<br>Design: Zoltan Nagy (Zo Nagy) · Code: Andor Czafik`
+    defaultValue: `Pebble Time / Time 2 / Round 2 · ${version}<br>Design: Zoltan Nagy (Zo Nagy) · Code: Andor Czafik`
   },
   {
     type: 'section',

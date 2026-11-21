@@ -1,11 +1,11 @@
 {
   "name": "blokk",
   "author": "Andor Czafik",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
-  "description": "Blokk watchface for Pebble Time and Pebble Time 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).",
+  "description": "Blokk watchface for Pebble Time, Pebble Time 2 and Pebble Round 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).",
   "dependencies": {
-    "pebble-clay": "1.0.4"
+    "@rebble/clay": "1.1.0"
   },
   "pebble": {
     "displayName": "Blokk",
@@ -14,7 +14,8 @@
     "enableMultiJS": true,
     "targetPlatforms": [
       "basalt",
-      "emery"
+      "emery",
+      "gabbro"
     ],
     "capabilities": [
       "configurable",
@@ -152,6 +153,60 @@
           "characterRegex": "[AMP]",
           "targetPlatforms": [
             "basalt"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_TIME_100",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[0-9]",
+          "targetPlatforms": [
+            "gabbro"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_DATE_24",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z0-9 ]",
+          "targetPlatforms": [
+            "gabbro"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_WDAY_15",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z]",
+          "targetPlatforms": [
+            "gabbro"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_INFO_26",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[0-9.\\-]",
+          "targetPlatforms": [
+            "gabbro"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_LABEL_18",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z]",
+          "targetPlatforms": [
+            "gabbro"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_AMPM_26",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[AMP]",
+          "targetPlatforms": [
+            "gabbro"
           ]
         }
       ]
