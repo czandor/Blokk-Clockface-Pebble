@@ -6,7 +6,7 @@ A native C port of the original Fitbit **Blokk** watchface (Design: **Zoltan Nag
 
 It preserves the iconic bold condensed typography (`American Captain`), mathematically exact 45° black long drop shadows, 9 vibrant color themes with optional diagonal gradients, date header, and the 4 staggered health & status fields nested cleanly inside the shadow zone.
 
-**Download latest release:** [Blokk-1.0.0.pbw](https://github.com/czandor/Blokk-Clockface-Pebble/releases/latest) (also in `dist/Blokk-1.0.0.pbw` with `dist/SHA256SUMS.txt`)
+**Download latest release:** [Blokk-1.0.1.pbw](https://github.com/czandor/Blokk-Clockface-Pebble/releases/latest) (also in `dist/Blokk-1.0.1.pbw` with `dist/SHA256SUMS.txt`)
 
 ## Features
 

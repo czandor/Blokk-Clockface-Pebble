@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 root = Path(__file__).resolve().parents[1]
 store = root / 'store'
 font_path = root / 'pebble/resources/fonts/AmericanCaptain.ttf'
-hero_path = store / 'emery-03-gradient-blue.png'
+hero_path = store / 'emery-01-turquoise.png'
 
 W, H = 720, 320
 banner = Image.new('RGB', (W, H), (12, 16, 20))

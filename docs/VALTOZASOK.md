@@ -1,4 +1,10 @@
-# Változásnapló — Blokk (Pebble Time 2)
+# Változásnapló — Blokk (Pebble Time & Pebble Time 2)
+
+## 1.0.1 (2026-11-21)
+
+- Lekerekített fekete kijelzősarkok az eredeti Fitbit Blokk keretéhez igazítva (`CORNER_R = 16` Emery-n, `CORNER_R = 12` Basalt-on), közvetlenül a framebuffer-menetben, extra RAM- és flash-igény nélkül.
+- Élesebb, monokróm pixelrácsra optimalizált alsó mezőfelirat- és számméretek (`FONT_LABEL_17` + `FONT_INFO_24` Emery-n, `FONT_LABEL_13` + `FONT_INFO_17` Basalt-on), hogy a `BPM`, `STP`, `BTT`, `ACT` betűi tisztán, torzulás nélkül jelenjenek meg.
+- Frissített áruházi képernyőképek és egyszínű türkiz hero-órás banner (`store/banner-720x320.png`).
 
 ## 1.0.0 (2026-11-21)
 

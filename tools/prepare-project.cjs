@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '../pebble');
-const version = '1.0.0';
+const version = '1.0.1';
 
 const keys = [
   'BG_OPTION',
@@ -31,15 +31,15 @@ const media = [
   { type: 'font', name: 'FONT_TIME_84', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_DATE_22', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_WDAY_14', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['emery'] },
-  { type: 'font', name: 'FONT_INFO_22', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['emery'] },
-  { type: 'font', name: 'FONT_LABEL_15', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['emery'] },
+  { type: 'font', name: 'FONT_INFO_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['emery'] },
+  { type: 'font', name: 'FONT_LABEL_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_AMPM_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['emery'] },
   // Basalt (Pebble Time / Time Steel, 144x168)
   { type: 'font', name: 'FONT_TIME_60', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_DATE_16', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_WDAY_11', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
-  { type: 'font', name: 'FONT_INFO_16', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['basalt'] },
-  { type: 'font', name: 'FONT_LABEL_12', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
+  { type: 'font', name: 'FONT_INFO_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['basalt'] },
+  { type: 'font', name: 'FONT_LABEL_13', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_AMPM_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['basalt'] }
 ];
 

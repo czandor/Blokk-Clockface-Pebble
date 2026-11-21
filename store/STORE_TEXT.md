@@ -34,6 +34,10 @@ https://czandor.hu/paypal/blokk
 
 ---
 
+## Release Notes (`1.0.1`)
+- Added crisp rounded black corners (`R=16` on Pebble Time 2, `R=12` on Pebble Time) matching the original Fitbit Blokk frame.
+- Refined info field label and number font sizes (`17px/24px` on Emery, `13px/17px` on Basalt) for cleaner monochrome legibility of `STP`, `BPM`, `BTT`, `ACT`, and `SEC`.
+
 ## Release Notes (`1.0.0`)
 - Initial native C release for Pebble Time (`basalt`, 144×168) and Pebble Time 2 (`emery`, 200×228).
 - 9 color themes with solid and dithered diagonal gradient modes + 6 color selection modes.

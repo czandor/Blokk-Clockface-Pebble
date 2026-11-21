@@ -1,7 +1,7 @@
 {
   "name": "blokk",
   "author": "Andor Czafik",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Blokk watchface for Pebble Time and Pebble Time 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).",
   "dependencies": {
@@ -75,7 +75,7 @@
         },
         {
           "type": "font",
-          "name": "FONT_INFO_22",
+          "name": "FONT_INFO_24",
           "file": "fonts/AmericanCaptain.ttf",
           "characterRegex": "[0-9.\\-]",
           "targetPlatforms": [
@@ -84,7 +84,7 @@
         },
         {
           "type": "font",
-          "name": "FONT_LABEL_15",
+          "name": "FONT_LABEL_17",
           "file": "fonts/AmericanCaptain.ttf",
           "characterRegex": "[A-Z]",
           "targetPlatforms": [
@@ -129,7 +129,7 @@
         },
         {
           "type": "font",
-          "name": "FONT_INFO_16",
+          "name": "FONT_INFO_17",
           "file": "fonts/AmericanCaptain.ttf",
           "characterRegex": "[0-9.\\-]",
           "targetPlatforms": [
@@ -138,7 +138,7 @@
         },
         {
           "type": "font",
-          "name": "FONT_LABEL_12",
+          "name": "FONT_LABEL_13",
           "file": "fonts/AmericanCaptain.ttf",
           "characterRegex": "[A-Z]",
           "targetPlatforms": [

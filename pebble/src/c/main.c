@@ -10,8 +10,8 @@
   #define RES_FONT_TIME  RESOURCE_ID_FONT_TIME_60
   #define RES_FONT_DATE  RESOURCE_ID_FONT_DATE_16
   #define RES_FONT_WDAY  RESOURCE_ID_FONT_WDAY_11
-  #define RES_FONT_INFO  RESOURCE_ID_FONT_INFO_16
-  #define RES_FONT_LABEL RESOURCE_ID_FONT_LABEL_12
+  #define RES_FONT_INFO  RESOURCE_ID_FONT_INFO_17
+  #define RES_FONT_LABEL RESOURCE_ID_FONT_LABEL_13
   #define RES_FONT_AMPM  RESOURCE_ID_FONT_AMPM_18
   #define TIME_Y         34
   #define TIME_BOX_H     68
@@ -24,19 +24,20 @@
   #define DATE_Y         14
   #define DATE_GAP       3
   #define WDAY_Y_OFF     1
-  #define INFO_SPLIT_X   { 59, 83, 114, 104 }
+  #define INFO_SPLIT_X   { 61, 85, 115, 106 }
   #define INFO_ROW_Y     { 99, 120, 99, 141 }
-  #define LABEL_X_OFF    26
-  #define LABEL_W        24
-  #define LABEL_Y_OFF    4
+  #define LABEL_X_OFF    30
+  #define LABEL_W        28
+  #define LABEL_Y_OFF    3
   #define VAL_W          40
+  #define CORNER_R       12
 #else
   #define HAS_HR_SENSOR 1
   #define RES_FONT_TIME  RESOURCE_ID_FONT_TIME_84
   #define RES_FONT_DATE  RESOURCE_ID_FONT_DATE_22
   #define RES_FONT_WDAY  RESOURCE_ID_FONT_WDAY_14
-  #define RES_FONT_INFO  RESOURCE_ID_FONT_INFO_22
-  #define RES_FONT_LABEL RESOURCE_ID_FONT_LABEL_15
+  #define RES_FONT_INFO  RESOURCE_ID_FONT_INFO_24
+  #define RES_FONT_LABEL RESOURCE_ID_FONT_LABEL_17
   #define RES_FONT_AMPM  RESOURCE_ID_FONT_AMPM_24
   #define TIME_Y         48
   #define TIME_BOX_H     92
@@ -49,12 +50,13 @@
   #define DATE_Y         22
   #define DATE_GAP       4
   #define WDAY_Y_OFF     2
-  #define INFO_SPLIT_X   { 82, 115, 158, 144 }
-  #define INFO_ROW_Y     { 138, 166, 138, 194 }
-  #define LABEL_X_OFF    34
-  #define LABEL_W        32
-  #define LABEL_Y_OFF    6
+  #define INFO_SPLIT_X   { 83, 116, 159, 145 }
+  #define INFO_ROW_Y     { 137, 165, 137, 193 }
+  #define LABEL_X_OFF    38
+  #define LABEL_W        36
+  #define LABEL_Y_OFF    5
   #define VAL_W          54
+  #define CORNER_R       16
 #endif
 
 #define SETTINGS_KEY 1
@@ -572,6 +574,20 @@ static int measure_width(const char *str, GFont font) {
   return sz.w;
 }
 
+static bool is_outside_rounded_corner(int px, int py) {
+  int dx = 0;
+  int dy = 0;
+  if (px < CORNER_R) dx = CORNER_R - 1 - px;
+  else if (px >= SCREEN_W - CORNER_R) dx = px - (SCREEN_W - CORNER_R);
+  else return false;
+
+  if (py < CORNER_R) dy = CORNER_R - 1 - py;
+  else if (py >= SCREEN_H - CORNER_R) dy = py - (SCREEN_H - CORNER_R);
+  else return false;
+
+  return (dx * dx + dy * dy) >= (CORNER_R * CORNER_R);
+}
+
 static void draw_time_and_shadow(GContext *ctx) {
   // 1. Clear to pure black so white glyphs stand out cleanly
   graphics_context_set_fill_color(ctx, GColorBlack);
@@ -663,7 +679,9 @@ static void draw_time_and_shadow(GContext *ctx) {
           row[px] = GColorBlackARGB8;
           shadow[px] = 1;
         } else {
-          row[px] = bg_pixel_color(px, py, color_id, gradient);
+          row[px] = is_outside_rounded_corner(px, py)
+            ? GColorBlackARGB8
+            : bg_pixel_color(px, py, color_id, gradient);
           shadow[px] = 0;
         }
       }

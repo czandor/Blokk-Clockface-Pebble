@@ -1,4 +1,10 @@
-# Ellenőrzési napló — Blokk (Pebble Time 2)
+# Ellenőrzési napló — Blokk (Pebble Time & Pebble Time 2)
+
+## 1.0.1 (2026-11-21)
+
+- **Build és tesztek:** `tools/build.ps1` (`emery` + `basalt` warning nélkül) és `node tools/test.cjs` sikeres (`dist/Blokk-1.0.1.pbw`).
+- **Emery és Basalt emulátor képernyőképek:** lekerekített fekete sarkok (`R=16` / `R=12`) és élesebb alsó felirat/szám betűméretek (`17/24` Emery, `13/17` Basalt) ellenőrizve, áruházi képek és egyszínű türkiz banner újragenerálva.
+- **Fizikai Pebble Time 2 (`192.168.130.135`):** `Blokk-1.0.1.pbw` sikeresen telepítve.
 
 ## 1.0.0 (2026-11-21)
 
