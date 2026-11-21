@@ -70,6 +70,7 @@ try {
   assert.equal(sentMessages.length, 1);
   assert.equal(sentMessages[0][mockKeys.BG_OPTION], 5);
   assert.equal(sentMessages[0][mockKeys.FIELD1], 1);
+  assert.equal(sentMessages[0][mockKeys.FIELD3], 10, 'VIB is the default top-right field');
   assert.equal(sentMessages[0][mockKeys.SAVED], undefined);
 
   // Trigger webviewclosed -> saves and sends payload with SAVED=1

@@ -78,7 +78,7 @@
           "type": "font",
           "name": "FONT_INFO_24",
           "file": "fonts/AmericanCaptain.ttf",
-          "characterRegex": "[0-9.\\-]",
+          "characterRegex": "[0-9.\\-NOF]",
           "targetPlatforms": [
             "emery"
           ]
@@ -132,7 +132,7 @@
           "type": "font",
           "name": "FONT_INFO_17",
           "file": "fonts/AmericanCaptain.ttf",
-          "characterRegex": "[0-9.\\-]",
+          "characterRegex": "[0-9.\\-NOF]",
           "targetPlatforms": [
             "basalt"
           ]
@@ -186,7 +186,7 @@
           "type": "font",
           "name": "FONT_INFO_26",
           "file": "fonts/AmericanCaptain.ttf",
-          "characterRegex": "[0-9.\\-]",
+          "characterRegex": "[0-9.\\-NOF]",
           "targetPlatforms": [
             "gabbro"
           ]

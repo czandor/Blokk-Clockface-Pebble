@@ -31,21 +31,21 @@ const media = [
   { type: 'font', name: 'FONT_TIME_84', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_DATE_22', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_WDAY_14', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['emery'] },
-  { type: 'font', name: 'FONT_INFO_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['emery'] },
+  { type: 'font', name: 'FONT_INFO_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_LABEL_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['emery'] },
   { type: 'font', name: 'FONT_AMPM_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['emery'] },
   // Basalt (Pebble Time / Time Steel, 144x168)
   { type: 'font', name: 'FONT_TIME_60', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_DATE_16', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_WDAY_11', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
-  { type: 'font', name: 'FONT_INFO_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['basalt'] },
+  { type: 'font', name: 'FONT_INFO_17', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_LABEL_13', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['basalt'] },
   { type: 'font', name: 'FONT_AMPM_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['basalt'] },
   // Gabbro (Pebble Round 2, 260x260 round)
   { type: 'font', name: 'FONT_TIME_100', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9]', targetPlatforms: ['gabbro'] },
   { type: 'font', name: 'FONT_DATE_24', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z0-9 ]', targetPlatforms: ['gabbro'] },
   { type: 'font', name: 'FONT_WDAY_15', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['gabbro'] },
-  { type: 'font', name: 'FONT_INFO_26', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-]', targetPlatforms: ['gabbro'] },
+  { type: 'font', name: 'FONT_INFO_26', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[0-9.\\-NOF]', targetPlatforms: ['gabbro'] },
   { type: 'font', name: 'FONT_LABEL_18', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[A-Z]', targetPlatforms: ['gabbro'] },
   { type: 'font', name: 'FONT_AMPM_26', file: 'fonts/AmericanCaptain.ttf', characterRegex: '[AMP]', targetPlatforms: ['gabbro'] }
 ];
@@ -109,7 +109,8 @@ const fieldOptions = [
   { label: 'SLP: Sleep hours', value: '5' },
   { label: 'CAL: Calories burned', value: '6' },
   { label: 'ACT: Active minutes', value: '7' },
-  { label: 'SEC: Seconds', value: '9' }
+  { label: 'SEC: Seconds', value: '9' },
+  { label: 'VIB: Vibration (OFF in Quiet Time)', value: '10' }
 ];
 
 const config = [
@@ -153,7 +154,7 @@ const config = [
     items: [
       { type: 'heading', defaultValue: 'Info Fields' },
       { type: 'select', messageKey: 'FIELD1', label: 'Top-left field', defaultValue: '1', options: fieldOptions },
-      { type: 'select', messageKey: 'FIELD3', label: 'Top-right field', defaultValue: '7', options: fieldOptions },
+      { type: 'select', messageKey: 'FIELD3', label: 'Top-right field', defaultValue: '10', options: fieldOptions },
       { type: 'select', messageKey: 'FIELD2', label: 'Middle-bottom field', defaultValue: '2', options: fieldOptions },
       { type: 'select', messageKey: 'FIELD4', label: 'Bottom field', defaultValue: '3', options: fieldOptions }
     ]

@@ -115,7 +115,8 @@ typedef enum {
   INFO_CALORIES = 6,
   INFO_ACTIVE = 7,
   INFO_BATTERY_LOW = 8,
-  INFO_SECONDS = 9
+  INFO_SECONDS = 9,
+  INFO_VIBE = 10  // VIB: ON = vibrations allowed, OFF = Quiet Time active
 } InfoType;
 
 typedef struct {
@@ -221,12 +222,12 @@ static Settings s_settings = {
   .bg_gradient = 0,
 #if !HAS_HR_SENSOR
   .fields = {
-    INFO_STEPS, INFO_SECONDS, INFO_ACTIVE, INFO_BATTERY,
+    INFO_STEPS, INFO_SECONDS, INFO_VIBE, INFO_BATTERY,
     INFO_CALORIES, INFO_NONE, INFO_SLEEP, INFO_DISTANCE
   },
 #else
   .fields = {
-    INFO_STEPS, INFO_BPM, INFO_ACTIVE, INFO_BATTERY,
+    INFO_STEPS, INFO_BPM, INFO_VIBE, INFO_BATTERY,
     INFO_CALORIES, INFO_SECONDS, INFO_SLEEP, INFO_DISTANCE
   },
 #endif
@@ -588,6 +589,10 @@ static void format_info_field(int info_type, char *label, size_t label_sz, char 
     case INFO_SECONDS:
       snprintf(label, label_sz, "SEC");
       snprintf(val, val_sz, "%02d", s_now.tm_sec);
+      break;
+    case INFO_VIBE:
+      snprintf(label, label_sz, "VIB");
+      snprintf(val, val_sz, "%s", quiet_time_is_active() ? "OFF" : "ON");
       break;
     default:
       *hide = true;
@@ -955,6 +960,12 @@ static void window_unload(Window *window) {
   fonts_unload_custom_font(s_font_ampm);
 }
 
+// Quiet Time has no change event: besides the minute tick, refresh the VIB
+// field as soon as the watchface regains focus (e.g. after a notification).
+static void app_focus_handler(bool in_focus) {
+  if (in_focus && s_canvas) layer_mark_dirty(s_canvas);
+}
+
 static void init(void) {
   time_t now = time(NULL);
   srand((unsigned int)now);
@@ -995,6 +1006,7 @@ static void init(void) {
   tick_timer_service_subscribe(s_seconds_subscribed ? SECOND_UNIT : MINUTE_UNIT, tick_handler);
   battery_state_service_subscribe(battery_handler);
   accel_tap_service_subscribe(tap_handler);
+  app_focus_service_subscribe(app_focus_handler);
 #if defined(PBL_HEALTH)
   s_health_subscribed = health_service_events_subscribe(health_handler, NULL);
 #endif
@@ -1012,6 +1024,7 @@ static void deinit(void) {
   tick_timer_service_unsubscribe();
   battery_state_service_unsubscribe();
   accel_tap_service_unsubscribe();
+  app_focus_service_unsubscribe();
 #if defined(PBL_HEALTH)
   health_service_events_unsubscribe();
 #endif

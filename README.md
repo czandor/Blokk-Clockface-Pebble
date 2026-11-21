@@ -1,8 +1,8 @@
-# Blokk — Pebble Time & Pebble Time 2
+# Blokk — Pebble Time, Pebble Time 2 & Pebble Round 2
 
 ![Blokk Banner](store/banner-720x320.png)
 
-A native C port of the original Fitbit **Blokk** watchface (Design: **Zoltan Nagy / Zo Nagy**, Code: **Andor Czafik**) for **Pebble Time (`basalt`, 144×168)** and **Pebble Time 2 (`emery`, 200×228)**.
+A native C port of the original Fitbit **Blokk** watchface (Design: **Zoltan Nagy / Zo Nagy**, Code: **Andor Czafik**) for **Pebble Time (`basalt`, 144×168)**, **Pebble Time 2 (`emery`, 200×228)** and **Pebble Round 2 (`gabbro`, 260×260 round)**.
 
 It preserves the iconic bold condensed typography (`American Captain`), mathematically exact 45° black long drop shadows, 9 vibrant color themes with optional diagonal gradients, date header, and the 4 staggered health & status fields nested cleanly inside the shadow zone.
 
@@ -16,10 +16,11 @@ It preserves the iconic bold condensed typography (`American Captain`), mathemat
   - 6 selection modes: *By the time of day* (default), *Choose one color*, *Random every day*, *Random every hour*, *Random every minute*, and *Random on wrist flick*.
   - Optional **Gradient background** rendered with 4×4 Bayer ordered dithering on Pebble Time 2's 64-color display.
 - **4 Configurable Info Fields (plus 4 Extra Fields on Wrist Flick):**
-  - Choose from: `STP` (Steps), `BPM` (Heart rate), `BTT` (Battery % or low-battery only ≤30%), `DST` (Distance in km or miles), `CAL` (Calories burned), `ACT` (Active minutes), `SLP` (Sleep hours), `SEC` (Seconds), or `Nothing`.
+  - Choose from: `STP` (Steps), `BPM` (Heart rate, Pebble Time 2 only), `BTT` (Battery % or low-battery only ≤30%), `DST` (Distance in km or miles), `CAL` (Calories burned), `ACT` (Active minutes), `SLP` (Sleep hours), `SEC` (Seconds), `VIB` (`ON`, or `OFF` while Quiet Time is active — the default top-right field), or `Nothing`.
   - Automatically switches between `MINUTE_UNIT` and `SECOND_UNIT` tick timers depending on whether `SEC` is currently visible.
   - Enable **Extra Info Fields** to toggle a second set of 4 fields for 20 seconds by flicking your wrist (with optional short vibration respecting Quiet Time).
-- **Offline Clay Settings:** Configure everything directly in the Pebble phone app without requiring internet access.
+- **Round Display Layout (Pebble Round 2):** Larger digits and fields arranged for the 260×260 circle; the shadow and background are drawn only inside the visible round area.
+- **Offline Clay Settings:** Configure everything directly in the Pebble phone app without requiring internet access (via the maintained `@rebble/clay` package).
 
 ## Screenshots
 
@@ -27,12 +28,16 @@ It preserves the iconic bold condensed typography (`American Captain`), mathemat
 | :---: | :---: | :---: | :---: | :---: |
 | ![Turquoise](store/emery-01-turquoise.png) | ![Gradient](store/emery-03-gradient-blue.png) | ![12h AM](store/emery-04-12h-ampm.png) | ![12h PM](store/emery-05-12h-pm.png) | ![Basalt Red](store/basalt-02-red.png) |
 
+| Pebble Round 2 (Turquoise) | Pebble Round 2 (Gradient) | Pebble Round 2 (12h AM) |
+| :---: | :---: | :---: |
+| ![Round Turquoise](store/gabbro-01-turquoise.png) | ![Round Gradient](store/gabbro-02-gradient-blue.png) | ![Round 12h AM](store/gabbro-03-12h-am.png) |
+
 ## Repository Structure
 
 | Path | Contents |
 | --- | --- |
 | `pebble/` | Native Pebble C source (`src/c/main.c`), PebbleKit JS (`src/pkjs/`), offline Clay configuration, and `AmericanCaptain.ttf` font. |
-| `dist/` | Compiled `Blokk-1.0.0.pbw` and `SHA256SUMS.txt`. |
+| `dist/` | Compiled `Blokk-*.pbw` builds and `SHA256SUMS.txt`. |
 | `tools/` | Build scripts (`build.ps1`, `build.sh`), manifest/config generator (`prepare-project.cjs`), emulator control panel (`Emulator-vezerlo.cmd`), and unit tests (`test.cjs`). |
 | `docs/` | Developer handoff (`FEJLESZTES.md`), changelog (`VALTOZASOK.md`), validation notes (`VALIDATION.md`), and emulator screenshots. |
 | `original/` | Read-only Fitbit Blokk reference source, screenshots, and font archive. |

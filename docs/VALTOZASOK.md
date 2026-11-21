@@ -1,4 +1,12 @@
-# Változásnapló — Blokk (Pebble Time & Pebble Time 2)
+# Változásnapló — Blokk (Pebble Time, Pebble Time 2 & Pebble Round 2)
+
+## 1.1.0 (2026-11-21)
+
+- Új platform: **Pebble Round 2 (`gabbro`, 260×260 kerek)**. Saját `American Captain` méretkészlet (`FONT_TIME_100`, `FONT_DATE_24`, `FONT_WDAY_15`, `FONT_INFO_26`, `FONT_LABEL_18`, `FONT_AMPM_26`) és a kör alakú kijelzőhöz igazított elrendezés: dátum fent, nagy `HH:MM` középen, a 3 soros információs mezők a 45°-os árnyékban.
+- Kerek kijelzőn nincs sarokmaszk (`CORNER_R = 0`): a kijelző széle adja a kártya körvonalát. A framebuffer-menet a soronkénti `min_x`/`max_x` tartományt használja, így az árnyék és a háttér pontosan a körön belül rajzolódik.
+- A Round 2-ben nincs pulzusmérő: a HR-mérő kód fordítási időben ki van zárva (`HAS_HR_SENSOR = 0`), az alapértelmezett 2. mező `SEC`, a 6. mező `Nothing` (a C-alapértékek és a telefonos `companion.js` is a `basalt` mellett a `gabbro` platformot is pulzusmérő nélkülinek kezeli).
+- Új **`VIB`** információs mező minden platformon: `ON`, ha az óra rezeghet, `OFF`, ha a Néma idő aktív. Ez lett az alapértelmezett 3. (jobb felső) mező az `ACT` helyett; az `ACT` továbbra is választható, a már elmentett beállítások nem változnak. A mező percenként és az óralap fókuszba kerülésekor frissül.
+- A `pebble-clay` 1.0.4 nem tartalmaz `gabbro` binárist, ezért a karbantartott **`@rebble/clay` 1.1.0** csomagra váltottunk (ugyanaz a Clay API; `aplite`–`gabbro` és `flint` támogatással).
 
 ## 1.0.1 (2026-11-21)
 

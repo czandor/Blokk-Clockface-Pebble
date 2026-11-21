@@ -154,6 +154,10 @@
           {
             "label": "SEC: Seconds",
             "value": "9"
+          },
+          {
+            "label": "VIB: Vibration (OFF in Quiet Time)",
+            "value": "10"
           }
         ]
       },
@@ -161,7 +165,7 @@
         "type": "select",
         "messageKey": "FIELD3",
         "label": "Top-right field",
-        "defaultValue": "7",
+        "defaultValue": "10",
         "options": [
           {
             "label": "Nothing",
@@ -202,6 +206,10 @@
           {
             "label": "SEC: Seconds",
             "value": "9"
+          },
+          {
+            "label": "VIB: Vibration (OFF in Quiet Time)",
+            "value": "10"
           }
         ]
       },
@@ -250,6 +258,10 @@
           {
             "label": "SEC: Seconds",
             "value": "9"
+          },
+          {
+            "label": "VIB: Vibration (OFF in Quiet Time)",
+            "value": "10"
           }
         ]
       },
@@ -298,6 +310,10 @@
           {
             "label": "SEC: Seconds",
             "value": "9"
+          },
+          {
+            "label": "VIB: Vibration (OFF in Quiet Time)",
+            "value": "10"
           }
         ]
       }
@@ -361,6 +377,10 @@
           {
             "label": "SEC: Seconds",
             "value": "9"
+          },
+          {
+            "label": "VIB: Vibration (OFF in Quiet Time)",
+            "value": "10"
           }
         ]
       },
@@ -409,6 +429,10 @@
           {
             "label": "SEC: Seconds",
             "value": "9"
+          },
+          {
+            "label": "VIB: Vibration (OFF in Quiet Time)",
+            "value": "10"
           }
         ]
       },
@@ -457,6 +481,10 @@
           {
             "label": "SEC: Seconds",
             "value": "9"
+          },
+          {
+            "label": "VIB: Vibration (OFF in Quiet Time)",
+            "value": "10"
           }
         ]
       },
@@ -505,6 +533,10 @@
           {
             "label": "SEC: Seconds",
             "value": "9"
+          },
+          {
+            "label": "VIB: Vibration (OFF in Quiet Time)",
+            "value": "10"
           }
         ]
       },

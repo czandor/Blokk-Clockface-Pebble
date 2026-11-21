@@ -1,4 +1,21 @@
-# Ellenőrzési napló — Blokk (Pebble Time & Pebble Time 2)
+# Ellenőrzési napló — Blokk (Pebble Time, Pebble Time 2 & Pebble Round 2)
+
+## 1.1.0 (2026-11-21)
+
+### Emulátoron és automatizált tesztekkel ellenőrizve
+- **Build:** `pebble clean` + `tools/build.ps1` sikeres `basalt` + `emery` + `gabbro` célra (csak a szokásos `RWX` linker-figyelmeztetés). Erőforrás / RAM: Gabbro `16 585 B` / `7 523 B`, Emery `15 261 B` / `8 475 B`, Basalt `13 681 B` / `7 475 B`.
+- **Egységtesztek (`node tools/test.cjs`):** sikeres; új ellenőrzés: `targetPlatforms = basalt, emery, gabbro`, a telefonos alapértelmezett `FIELD3 = 10` (`VIB`), a Clay-mock az `@rebble/clay` csomagnévre figyel.
+- **Gabbro (Round 2) emulátor (`docs/gabbro-case-*.png`, `docs/gabbro-vib.png`):**
+  - Széles (`20:08`), keskeny (`11:11`) és vegyes (`14:25`, `08:47`) számjegyek a körön belül; a 45°-os árnyék és a háttér csak a látható körben rajzolódik.
+  - 5 jegyű lépésszám (`12345`) és a 3 soros mezők a kör alsó részén is a kijelzőn belül maradnak.
+  - 12 órás mód `AM` (`10:09`) és `PM` (`09:41`) felirattal: a felirat saját árnyékot vet, és nem ér bele a fő árnyékba (ideiglenes `companion.js` alapértékkel, utána visszaállítva).
+  - Kék gradiens háttér (`18:36`) ditherelve a körön belül.
+  - Rázásra megjelenő második mezőkészlet (`CAL`, `SLP`, `DST`) a `emu-tap` paranccsal.
+- **`VIB` mező mindhárom emulátoron (`docs/basalt-vib.png`, `docs/emery-vib.png`, `docs/gabbro-vib.png`):** alapértelmezettként a jobb felső helyen, `VIB ON` kiírással.
+
+### Fizikai órán
+- **Pebble Time 2 (`192.168.130.135`):** `Blokk-1.1.0.pbw` sikeresen telepítve; a megjelenést Andor nézi élőben.
+- **Még ellenőrzendő:** a `VIB OFF` állapot valódi Néma időben (az emulátorban a Néma idő parancssorból nem kapcsolható, így az `OFF` kiírás csak kódszinten ellenőrzött), valamint a teljes Round 2 elrendezés fizikai Pebble Round 2 órán (ilyen eszköz nem állt rendelkezésre).
 
 ## 1.0.1 (2026-11-21)
 

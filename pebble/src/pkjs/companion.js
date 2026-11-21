@@ -43,7 +43,7 @@ var defaults = {
   BG_GRADIENT: 0,
   FIELD1: 1,
   FIELD2: 2,
-  FIELD3: 7,
+  FIELD3: 10, // VIB (Quiet Time indicator)
   FIELD4: 3,
   HOUR_MODE: 0,
   SHOW_AMPM: 0,
