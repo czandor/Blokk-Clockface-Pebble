@@ -1,0 +1,160 @@
+{
+  "name": "blokk",
+  "author": "Andor Czafik",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Blokk watchface for Pebble Time and Pebble Time 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).",
+  "dependencies": {
+    "pebble-clay": "1.0.4"
+  },
+  "pebble": {
+    "displayName": "Blokk",
+    "uuid": "3fb5fda5-0820-4c60-8adf-c07541a3870d",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "basalt",
+      "emery"
+    ],
+    "capabilities": [
+      "configurable",
+      "health"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "BG_OPTION",
+      "BG_COLOR",
+      "BG_GRADIENT",
+      "FIELD1",
+      "FIELD2",
+      "FIELD3",
+      "FIELD4",
+      "HOUR_MODE",
+      "SHOW_AMPM",
+      "DIST_UNIT",
+      "SECONDARY_INFO",
+      "FIELD5",
+      "FIELD6",
+      "FIELD7",
+      "FIELD8",
+      "TAP_VIBE",
+      "VIBE_IN_QUIET",
+      "SAVED",
+      "HR_SHAKE"
+    ],
+    "resources": {
+      "media": [
+        {
+          "type": "font",
+          "name": "FONT_TIME_84",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[0-9]",
+          "targetPlatforms": [
+            "emery"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_DATE_22",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z0-9 ]",
+          "targetPlatforms": [
+            "emery"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_WDAY_14",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z]",
+          "targetPlatforms": [
+            "emery"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_INFO_22",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[0-9.\\-]",
+          "targetPlatforms": [
+            "emery"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_LABEL_15",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z]",
+          "targetPlatforms": [
+            "emery"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_AMPM_24",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[AMP]",
+          "targetPlatforms": [
+            "emery"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_TIME_60",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[0-9]",
+          "targetPlatforms": [
+            "basalt"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_DATE_16",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z0-9 ]",
+          "targetPlatforms": [
+            "basalt"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_WDAY_11",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z]",
+          "targetPlatforms": [
+            "basalt"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_INFO_16",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[0-9.\\-]",
+          "targetPlatforms": [
+            "basalt"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_LABEL_12",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[A-Z]",
+          "targetPlatforms": [
+            "basalt"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "FONT_AMPM_18",
+          "file": "fonts/AmericanCaptain.ttf",
+          "characterRegex": "[AMP]",
+          "targetPlatforms": [
+            "basalt"
+          ]
+        }
+      ]
+    }
+  }
+}

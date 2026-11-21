@@ -1,0 +1,611 @@
+[
+  {
+    "type": "heading",
+    "defaultValue": "Blokk"
+  },
+  {
+    "type": "text",
+    "defaultValue": "Pebble Time / Time 2 · 1.0.0<br>Design: Zoltan Nagy (Zo Nagy) · Code: Andor Czafik"
+  },
+  {
+    "type": "section",
+    "items": [
+      {
+        "type": "heading",
+        "defaultValue": "Background Color"
+      },
+      {
+        "type": "select",
+        "messageKey": "BG_OPTION",
+        "label": "Color selection method",
+        "defaultValue": "5",
+        "options": [
+          {
+            "label": "By the time of day",
+            "value": "5"
+          },
+          {
+            "label": "Choose one color",
+            "value": "0"
+          },
+          {
+            "label": "Random every day",
+            "value": "4"
+          },
+          {
+            "label": "Random every hour",
+            "value": "2"
+          },
+          {
+            "label": "Random every minute",
+            "value": "1"
+          },
+          {
+            "label": "Random on wrist flick",
+            "value": "3"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "messageKey": "BG_COLOR",
+        "label": "Fixed background color",
+        "defaultValue": "2",
+        "options": [
+          {
+            "label": "Red",
+            "value": "0"
+          },
+          {
+            "label": "Orange",
+            "value": "1"
+          },
+          {
+            "label": "Yellow",
+            "value": "2"
+          },
+          {
+            "label": "Green",
+            "value": "3"
+          },
+          {
+            "label": "Turquoise",
+            "value": "4"
+          },
+          {
+            "label": "Blue",
+            "value": "5"
+          },
+          {
+            "label": "Dark Blue",
+            "value": "6"
+          },
+          {
+            "label": "Pink",
+            "value": "7"
+          },
+          {
+            "label": "Purple",
+            "value": "8"
+          }
+        ]
+      },
+      {
+        "type": "toggle",
+        "messageKey": "BG_GRADIENT",
+        "label": "Gradient background",
+        "defaultValue": false
+      },
+      {
+        "type": "text",
+        "defaultValue": "Time of day mode shifts from red/orange at dawn, yellow in the morning, turquoise/blue in the afternoon, to purple at night."
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "items": [
+      {
+        "type": "heading",
+        "defaultValue": "Info Fields"
+      },
+      {
+        "type": "select",
+        "messageKey": "FIELD1",
+        "label": "Top-left field",
+        "defaultValue": "1",
+        "options": [
+          {
+            "label": "Nothing",
+            "value": "0"
+          },
+          {
+            "label": "STP: Today's steps",
+            "value": "1"
+          },
+          {
+            "label": "BPM: Heart rate",
+            "value": "2"
+          },
+          {
+            "label": "BTT: Battery %",
+            "value": "3"
+          },
+          {
+            "label": "BTT: Battery, if low (<=30%)",
+            "value": "8"
+          },
+          {
+            "label": "DST: Distance (km or mi)",
+            "value": "4"
+          },
+          {
+            "label": "SLP: Sleep hours",
+            "value": "5"
+          },
+          {
+            "label": "CAL: Calories burned",
+            "value": "6"
+          },
+          {
+            "label": "ACT: Active minutes",
+            "value": "7"
+          },
+          {
+            "label": "SEC: Seconds",
+            "value": "9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "messageKey": "FIELD3",
+        "label": "Top-right field",
+        "defaultValue": "7",
+        "options": [
+          {
+            "label": "Nothing",
+            "value": "0"
+          },
+          {
+            "label": "STP: Today's steps",
+            "value": "1"
+          },
+          {
+            "label": "BPM: Heart rate",
+            "value": "2"
+          },
+          {
+            "label": "BTT: Battery %",
+            "value": "3"
+          },
+          {
+            "label": "BTT: Battery, if low (<=30%)",
+            "value": "8"
+          },
+          {
+            "label": "DST: Distance (km or mi)",
+            "value": "4"
+          },
+          {
+            "label": "SLP: Sleep hours",
+            "value": "5"
+          },
+          {
+            "label": "CAL: Calories burned",
+            "value": "6"
+          },
+          {
+            "label": "ACT: Active minutes",
+            "value": "7"
+          },
+          {
+            "label": "SEC: Seconds",
+            "value": "9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "messageKey": "FIELD2",
+        "label": "Middle-bottom field",
+        "defaultValue": "2",
+        "options": [
+          {
+            "label": "Nothing",
+            "value": "0"
+          },
+          {
+            "label": "STP: Today's steps",
+            "value": "1"
+          },
+          {
+            "label": "BPM: Heart rate",
+            "value": "2"
+          },
+          {
+            "label": "BTT: Battery %",
+            "value": "3"
+          },
+          {
+            "label": "BTT: Battery, if low (<=30%)",
+            "value": "8"
+          },
+          {
+            "label": "DST: Distance (km or mi)",
+            "value": "4"
+          },
+          {
+            "label": "SLP: Sleep hours",
+            "value": "5"
+          },
+          {
+            "label": "CAL: Calories burned",
+            "value": "6"
+          },
+          {
+            "label": "ACT: Active minutes",
+            "value": "7"
+          },
+          {
+            "label": "SEC: Seconds",
+            "value": "9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "messageKey": "FIELD4",
+        "label": "Bottom field",
+        "defaultValue": "3",
+        "options": [
+          {
+            "label": "Nothing",
+            "value": "0"
+          },
+          {
+            "label": "STP: Today's steps",
+            "value": "1"
+          },
+          {
+            "label": "BPM: Heart rate",
+            "value": "2"
+          },
+          {
+            "label": "BTT: Battery %",
+            "value": "3"
+          },
+          {
+            "label": "BTT: Battery, if low (<=30%)",
+            "value": "8"
+          },
+          {
+            "label": "DST: Distance (km or mi)",
+            "value": "4"
+          },
+          {
+            "label": "SLP: Sleep hours",
+            "value": "5"
+          },
+          {
+            "label": "CAL: Calories burned",
+            "value": "6"
+          },
+          {
+            "label": "ACT: Active minutes",
+            "value": "7"
+          },
+          {
+            "label": "SEC: Seconds",
+            "value": "9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "items": [
+      {
+        "type": "heading",
+        "defaultValue": "Extra Info Fields (Wrist Flick)"
+      },
+      {
+        "type": "toggle",
+        "messageKey": "SECONDARY_INFO",
+        "label": "Enable secondary info fields",
+        "defaultValue": false
+      },
+      {
+        "type": "select",
+        "messageKey": "FIELD5",
+        "label": "Flick: Top-left field",
+        "defaultValue": "6",
+        "options": [
+          {
+            "label": "Nothing",
+            "value": "0"
+          },
+          {
+            "label": "STP: Today's steps",
+            "value": "1"
+          },
+          {
+            "label": "BPM: Heart rate",
+            "value": "2"
+          },
+          {
+            "label": "BTT: Battery %",
+            "value": "3"
+          },
+          {
+            "label": "BTT: Battery, if low (<=30%)",
+            "value": "8"
+          },
+          {
+            "label": "DST: Distance (km or mi)",
+            "value": "4"
+          },
+          {
+            "label": "SLP: Sleep hours",
+            "value": "5"
+          },
+          {
+            "label": "CAL: Calories burned",
+            "value": "6"
+          },
+          {
+            "label": "ACT: Active minutes",
+            "value": "7"
+          },
+          {
+            "label": "SEC: Seconds",
+            "value": "9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "messageKey": "FIELD7",
+        "label": "Flick: Top-right field",
+        "defaultValue": "5",
+        "options": [
+          {
+            "label": "Nothing",
+            "value": "0"
+          },
+          {
+            "label": "STP: Today's steps",
+            "value": "1"
+          },
+          {
+            "label": "BPM: Heart rate",
+            "value": "2"
+          },
+          {
+            "label": "BTT: Battery %",
+            "value": "3"
+          },
+          {
+            "label": "BTT: Battery, if low (<=30%)",
+            "value": "8"
+          },
+          {
+            "label": "DST: Distance (km or mi)",
+            "value": "4"
+          },
+          {
+            "label": "SLP: Sleep hours",
+            "value": "5"
+          },
+          {
+            "label": "CAL: Calories burned",
+            "value": "6"
+          },
+          {
+            "label": "ACT: Active minutes",
+            "value": "7"
+          },
+          {
+            "label": "SEC: Seconds",
+            "value": "9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "messageKey": "FIELD6",
+        "label": "Flick: Middle-bottom field",
+        "defaultValue": "9",
+        "options": [
+          {
+            "label": "Nothing",
+            "value": "0"
+          },
+          {
+            "label": "STP: Today's steps",
+            "value": "1"
+          },
+          {
+            "label": "BPM: Heart rate",
+            "value": "2"
+          },
+          {
+            "label": "BTT: Battery %",
+            "value": "3"
+          },
+          {
+            "label": "BTT: Battery, if low (<=30%)",
+            "value": "8"
+          },
+          {
+            "label": "DST: Distance (km or mi)",
+            "value": "4"
+          },
+          {
+            "label": "SLP: Sleep hours",
+            "value": "5"
+          },
+          {
+            "label": "CAL: Calories burned",
+            "value": "6"
+          },
+          {
+            "label": "ACT: Active minutes",
+            "value": "7"
+          },
+          {
+            "label": "SEC: Seconds",
+            "value": "9"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "messageKey": "FIELD8",
+        "label": "Flick: Bottom field",
+        "defaultValue": "4",
+        "options": [
+          {
+            "label": "Nothing",
+            "value": "0"
+          },
+          {
+            "label": "STP: Today's steps",
+            "value": "1"
+          },
+          {
+            "label": "BPM: Heart rate",
+            "value": "2"
+          },
+          {
+            "label": "BTT: Battery %",
+            "value": "3"
+          },
+          {
+            "label": "BTT: Battery, if low (<=30%)",
+            "value": "8"
+          },
+          {
+            "label": "DST: Distance (km or mi)",
+            "value": "4"
+          },
+          {
+            "label": "SLP: Sleep hours",
+            "value": "5"
+          },
+          {
+            "label": "CAL: Calories burned",
+            "value": "6"
+          },
+          {
+            "label": "ACT: Active minutes",
+            "value": "7"
+          },
+          {
+            "label": "SEC: Seconds",
+            "value": "9"
+          }
+        ]
+      },
+      {
+        "type": "toggle",
+        "messageKey": "HR_SHAKE",
+        "label": "Measure heart rate on shake",
+        "defaultValue": false
+      },
+      {
+        "type": "text",
+        "defaultValue": "A wrist flick requests up to 45 seconds of faster heart rate sampling (1 Hz) until two consistent readings confirm BPM. During measurement the BPM label blinks. Frequent use drains the battery faster."
+      },
+      {
+        "type": "toggle",
+        "messageKey": "TAP_VIBE",
+        "label": "Vibrate on wrist flick",
+        "defaultValue": true
+      },
+      {
+        "type": "toggle",
+        "messageKey": "VIBE_IN_QUIET",
+        "label": "Vibrate on flick during Quiet Time",
+        "defaultValue": false
+      },
+      {
+        "type": "text",
+        "defaultValue": "Flick your wrist to switch to the secondary info fields for 20 seconds (flick again to return immediately)."
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "items": [
+      {
+        "type": "heading",
+        "defaultValue": "Time & Units"
+      },
+      {
+        "type": "select",
+        "messageKey": "HOUR_MODE",
+        "label": "Time format",
+        "defaultValue": "0",
+        "options": [
+          {
+            "label": "Watch preference",
+            "value": "0"
+          },
+          {
+            "label": "24h",
+            "value": "1"
+          },
+          {
+            "label": "12h",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "type": "toggle",
+        "messageKey": "SHOW_AMPM",
+        "label": "Show AM/PM in 12h mode",
+        "defaultValue": false
+      },
+      {
+        "type": "select",
+        "messageKey": "DIST_UNIT",
+        "label": "Distance unit",
+        "defaultValue": "0",
+        "options": [
+          {
+            "label": "Metric (km)",
+            "value": "1"
+          },
+          {
+            "label": "US (miles)",
+            "value": "2"
+          },
+          {
+            "label": "Default (km)",
+            "value": "0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "items": [
+      {
+        "type": "heading",
+        "defaultValue": "Support"
+      },
+      {
+        "type": "text",
+        "defaultValue": "This watchface is completely free. If you like it, you can support our work here: <a href=\"https://czandor.hu/paypal/blokk\">Buy us a coffee</a>"
+      }
+    ]
+  },
+  {
+    "type": "submit",
+    "defaultValue": "Save settings"
+  }
+]
