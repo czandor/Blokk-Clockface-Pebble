@@ -1,7 +1,7 @@
 {
   "name": "blokk",
   "author": "Andor Czafik",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "description": "Blokk watchface for Pebble Time, Pebble Time Round, Pebble Time 2 and Pebble Round 2, ported from the original Fitbit clockface (Design: Zoltan Nagy, Code: Andor Czafik).",
   "dependencies": {

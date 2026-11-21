@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '../pebble');
-const version = '1.1.0';
+const version = '1.1.1';
 
 const keys = [
   'BG_OPTION',

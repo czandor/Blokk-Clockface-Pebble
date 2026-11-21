@@ -1,5 +1,19 @@
 # Ellenőrzési napló — Blokk (Pebble Time, Pebble Time Round, Pebble Time 2 & Pebble Round 2)
 
+## 1.1.1 (2026-11-21)
+
+### Fizikai Pebble Time Round-on mérve (`192.168.130.135`, ideiglenes `time_ms` + `APP_LOG` mérőbuilddel)
+- **Előtte (1.1.0):** minden másodpercben teljes rajzolás, ~55 ms képkockánként (számjegyek 8–12 ms, árnyék/háttér 8–12 ms, dátum 12–16 ms, 4 mező 16–20 ms; az óra időzítője ~4 ms-os lépésekben mér).
+- **Utána (1.1.1):** gyorsítótárból 0–4 ms a másodpercenkénti képkocka. Teljes rajzolás csak percváltáskor vagy változáskor, ~55 ms; ennek nagyobb részét a firmware szövegrajzolása adja.
+- A végleges `Blokk-1.1.1.pbw` telepítve az órára.
+
+### Emulátoron és automatizált tesztekkel
+- **Build:** `pebble clean` + `tools/build.ps1` sikeres mind a négy platformra (`dist/Blokk-1.1.1.pbw`).
+- **Egységtesztek:** sikeres; új ellenőrzés: friss telepítéskor `basalt`/`chalk`/`gabbro` esetén `FIELD2 = 7` (`ACT`), `FIELD6 = 9` (`SEC`), `FIELD3 = 10` (`VIB`); Emery-n továbbra is `FIELD2 = 2` (`BPM`).
+- **Pixelmenet-egyezés:** a táblás gradiens és a soronkénti sarokszélesség Pythonban kimerítően összevetve az eredeti képlettel, mind a 4 kijelzőméreten és mind a 9 színen: 0 eltérő pixel (1,5 millió pixel).
+- **Képernyőkép-összevetés az 1.1.0-val (14:25, türkiz):** Emery pixelre azonos. Gabbro és Basalt csak a középső mező területén tér el (`SEC` → `ACT`, illetve Basalt-on a töltésjelzés).
+- **Chalk:** firmware-konzollal ellenőrizve, hardfault nincs. Verem-tartalék a teljes rajzolás legmélyebb pontján ~270 B (a mérőkód saját változóival együtt mérve).
+
 ## 1.1.0 (2026-11-21)
 
 ### Emulátoron és automatizált tesztekkel ellenőrizve

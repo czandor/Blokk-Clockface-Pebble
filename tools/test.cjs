@@ -112,6 +112,23 @@ try {
   assert.equal(persisted.BG_GRADIENT, 1);
   assert.equal(comp.toBoolInt('true'), 1);
   assert.equal(comp.toBoolInt(false), 0);
+  // Emery (HR sensor) keeps BPM / SEC as the 2nd / 6th fields
+  assert.equal(sentMessages[0][mockKeys.FIELD2], 2, 'BPM is the default 2nd field with an HR sensor');
+  assert.equal(sentMessages[0][mockKeys.FIELD6], 9, 'SEC is the default 6th field');
+
+  // Watches without an HR sensor: fresh install -> ACT as 2nd field, SEC stays in the wrist-flick set
+  for (const platform of ['basalt', 'chalk', 'gabbro']) {
+    for (const k of Object.keys(store)) delete store[k];
+    sentMessages.length = 0;
+    global.Pebble.getActiveWatchInfo = () => ({ platform });
+    delete require.cache[require.resolve(path.join(root, 'pebble/src/pkjs/companion.js'))];
+    require(path.join(root, 'pebble/src/pkjs/companion.js'));
+    listeners.ready();
+    assert.equal(sentMessages[0][mockKeys.FIELD2], 7, `${platform}: ACT is the default 2nd field`);
+    assert.equal(sentMessages[0][mockKeys.FIELD6], 9, `${platform}: SEC is the default 6th field`);
+    assert.equal(sentMessages[0][mockKeys.FIELD3], 10, `${platform}: VIB is the default 3rd field`);
+  }
+  delete global.Pebble.getActiveWatchInfo;
 } finally {
   Module._load = origLoad;
 }

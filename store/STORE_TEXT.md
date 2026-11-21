@@ -35,6 +35,10 @@ https://czandor.hu/paypal/blokk
 
 ---
 
+## Release Notes (`1.1.1`)
+- Much faster per-second updates (especially on Pebble Time Round): the unchanged parts of the face are cached and only the seconds are redrawn.
+- Watches without a heart-rate sensor now show `ACT` (active minutes) as the default second field; `SEC` moved to the wrist-flick fields. Saved settings are kept.
+
 ## Release Notes (`1.1.0`)
 - New platforms: Pebble Time Round (`chalk`, 180×180) and Pebble Round 2 (`gabbro`, 260×260) with dedicated round layouts.
 - Lower stack usage while drawing (fixes a reboot loop on Pebble Time Round).

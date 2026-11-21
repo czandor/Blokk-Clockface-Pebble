@@ -1,5 +1,11 @@
 # Változásnapló — Blokk (Pebble Time, Pebble Time Round, Pebble Time 2 & Pebble Round 2)
 
+## 1.1.1 (2026-11-21)
+
+- **Gyorsabb rajzolás, főleg a Pebble Time Round-on.** Képkocka-gyorsítótár: a háttér, a számjegyek, a 45°-os árnyék, a dátum és a nem másodpercenként változó mezők egyszer rajzolódnak meg, és a kép a heapen eltárolódik. Amíg ezek közül semmi nem változik (perc, szín, beállítás, mezőértékek), a másodpercenkénti frissítés csak visszamásolja a képet, és a `SEC` mezőt rajzolja rá. Valódi Time Round-on mérve ~55 ms helyett 0–4 ms képkockánként.
+- A teljes rajzolás pixelmenete előre számolt táblákkal fut (gradiens: oszloponkénti `tx`, csatornánkénti kvantálás és dither-küszöb; lekerekített sarkok: soronkénti szélesség), függvényhívás és osztás nélkül, bitre azonos eredménnyel.
+- **Új alapértékek pulzusmérő nélküli órákon (Pebble Time, Time Round, Round 2):** a 2. mező `SEC` helyett `ACT` (aktív percek), a `SEC` pedig a rázásra megjelenő készlet 6. mezőjébe került (eddig `Nothing`). Így alapból percenként frissül az óralap. A már elmentett beállításokat ez nem írja felül.
+
 ## 1.1.0 (2026-11-21)
 
 - Új platform: **Pebble Time Round (`chalk`, 180×180 kerek)** a Round 2 elrendezés ~0,69-szeres kicsinyítésével (`FONT_TIME_70`, `FONT_DATE_17`, `FONT_INFO_18`; a `FONT_WDAY_11`, `FONT_LABEL_13`, `FONT_AMPM_18` közös a Pebble Time-mal). Pulzusmérő itt sincs, ezért a `SEC` az alapértelmezett 2. mező.

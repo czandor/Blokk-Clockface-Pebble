@@ -83,24 +83,25 @@ function watchLacksHrSensor() {
   return false;
 }
 
+// Without a heart-rate sensor the BPM slot shows ACT (active minutes) instead;
+// SEC stays in the wrist-flick fields (FIELD6), so the face ticks per minute.
+var NO_HR_FIELD2 = 7;
+
+function defaultFor(key, noHr) {
+  if (noHr && key === 'FIELD2') return NO_HR_FIELD2;
+  return defaults[key];
+}
+
 function loadSettings() {
   var saved = stored('blokk.settings', null);
   var noHr = watchLacksHrSensor();
   var src = saved || {};
   Object.keys(defaults).forEach(function (k) {
-    if (src[k] !== undefined) {
-      settings[k] = src[k];
-    } else if (noHr && k === 'FIELD2') {
-      settings[k] = 9; // SEC instead of BPM (no HR sensor)
-    } else if (noHr && k === 'FIELD6') {
-      settings[k] = 0; // Nothing instead of duplicate SEC in secondary fields
-    } else {
-      settings[k] = defaults[k];
-    }
+    settings[k] = src[k] !== undefined ? src[k] : defaultFor(k, noHr);
   });
   if (!saved && noHr && typeof clay.setSettings === 'function') {
     try {
-      clay.setSettings({ FIELD2: '9', FIELD6: '0' });
+      clay.setSettings({ FIELD2: String(NO_HR_FIELD2) });
     } catch (e) {}
   }
 }
@@ -176,6 +177,7 @@ Pebble.addEventListener('showConfiguration', function () {
 Pebble.addEventListener('webviewclosed', function (e) {
   if (!e || !e.response) return;
   var raw = clay.getSettings(e.response, false);
+  var noHr = watchLacksHrSensor();
   var parsed = {};
   Object.keys(defaults).forEach(function (k) {
     if (raw[k] !== undefined) {
@@ -183,10 +185,10 @@ Pebble.addEventListener('webviewclosed', function (e) {
       if (k === 'BG_GRADIENT' || k === 'SHOW_AMPM' || k === 'SECONDARY_INFO' || k === 'TAP_VIBE' || k === 'VIBE_IN_QUIET' || k === 'HR_SHAKE') {
         parsed[k] = toBoolInt(val);
       } else {
-        parsed[k] = toInt(val, defaults[k]);
+        parsed[k] = toInt(val, defaultFor(k, noHr));
       }
     } else {
-      parsed[k] = defaults[k];
+      parsed[k] = defaultFor(k, noHr);
     }
   });
   settings = parsed;
@@ -199,5 +201,5 @@ Pebble.addEventListener('webviewclosed', function (e) {
 });
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { defaults: defaults, buildPayload: buildPayload, toInt: toInt, toBoolInt: toBoolInt };
+  module.exports = { defaults: defaults, defaultFor: defaultFor, buildPayload: buildPayload, toInt: toInt, toBoolInt: toBoolInt };
 }
